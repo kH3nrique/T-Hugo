@@ -2,17 +2,12 @@
 #include <fstream>
 #include <vector>
 #include <time.h>
+#include <algorithm>
+#include <stdbool.h>
+#include <limits.h>
 
-#define V 100
+#define V 7
+const int INF = INT_MAX;
 
 using namespace std;
 
-int safe(int graf[V][V], int tam){
-    for (int i = 0; i < tam; i++){
-        for (int j = 0; j < tam; j++){
-            if (i == i + 2 && j == j + 2){
-                
-            }
-        }
-    }
-}

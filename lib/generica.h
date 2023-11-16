@@ -3,12 +3,24 @@
 
 #include "instancias.h"
 
-int generico(int graf[V][V], int e, int tam){
-    int t;
-    while (e < tam - 1){//e: aresta
-        for (int i = 0; i < tam; i++){
-            for (int j = 0; j < tam; j++){
-                e = safe(graf[i][100], tam);
+int generico(vector<Aresta> aresta, int n){
+    int cost = 0;
+    std::vector<int> tree_id(n);
+    std::vector<Aresta> result;
+    for (int i = 0; i < n; i++)
+        tree_id[i] = i;
+
+    sort(aresta.begin(), aresta.end());
+
+    for (Aresta e : aresta) {
+        if (tree_id[e.origem] != tree_id[e.destino]) {
+            cost += e.peso;
+            result.push_back(e);
+
+            int old_id = tree_id[e.origem], new_id = tree_id[e.destino];
+            for (int i = 0; i < n; i++) {
+                if (tree_id[i] == old_id)
+                    tree_id[i] = new_id;
             }
         }
     }

@@ -3,8 +3,8 @@
 
 #include "instancias.h"
 
-int kruskal(int graf[V][V]){
-    int t;
+int kruskal() {
+   
 }
 
 #endif

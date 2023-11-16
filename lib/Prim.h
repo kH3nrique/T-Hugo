@@ -1,11 +1,7 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <limits.h>
+#ifndef PRIM_H
+#define PRIM_H
 
-#define V 7 // Número de vértices no grafo
-
-const int INF = INT_MAX;
+#include "instancias.h"
 
 // Função para implementar o algoritmo de Prim
 void prim(int mat[V][V], int vertices) {
@@ -107,3 +103,5 @@ void executarAlgoritmoPrim(const char* filePath) {
 
     prim(matriz_adjacencia, vertices);
 }
+
+#endif

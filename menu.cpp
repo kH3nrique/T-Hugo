@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Prim.h"
 
 using namespace std;
@@ -24,7 +23,7 @@ int main() {
                 //Algoritimo Generico
                 break;
             case 2:
-                //Algoritimo e Kruskal
+                //Algoritimo de Kruskal
                 break;
             case 3:
                 system("cls");
