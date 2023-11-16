@@ -2,7 +2,11 @@
 #include <fstream>
 #include <vector>
 #include <time.h>
-#include <cstdio>
-#include <cstring>
+
+#define V 100
 
 using namespace std;
+
+int safe(int graf[V][V]){
+    
+}

@@ -1,9 +1,13 @@
+#ifndef GENERICA_H
+#define GENERICA_H
+
 #include "instancias.h"
 
-double generico(){
-    double T;
-    while ()
-    {
-        /* code */
+int generico(int graf[V][V]){
+    int t;
+    while (){
+        
     }
 }
+
+#endif
