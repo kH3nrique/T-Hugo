@@ -1,4 +1,6 @@
 #include ".\lib\Prim.h"
+#include ".\lib\kruskal.h"
+#include ".\lib\generica.h"
 
 using namespace std;
 
@@ -28,9 +30,10 @@ int main() {
             case 3:
                 system("cls");
 
-                executarAlgoritmoPrim("C:\\Users\\gabri\\OneDrive\\Documentos\\Quarto periodo\\Trabalho Hugo\\graph.txt");
+                executarAlgoritmoPrim("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
 
-                getchar(); getchar();
+                getchar();
+                getchar();
                 system("cls");
                 break;
             case 0:

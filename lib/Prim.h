@@ -54,22 +54,6 @@ void prim(int mat[V][V], int vertices) {
 
 }
 
-// int main() {
-
-//     int mat[V][V] = {
-//         {INF, 7, INF, 5, INF, INF, INF},
-//         {INF, INF, 8, 9, 7, INF, INF},
-//         {INF, 8, INF, INF, 5, INF, INF},
-//         {5, 9, INF, INF, 15, 6, INF},
-//         {INF, 7, 5, 15, INF, 8, 9},
-//         {INF, INF, INF, 6, 8, INF, 11},
-//         {INF, INF, INF, INF, 9, 11, INF}
-//     };
-
-//     int inicioVertex = 0;
-//     prim(mat, V);
-// }
-
 void executarAlgoritmoPrim(const char* filePath) {
     FILE *arquivo;
     int vertices, arestas; 
