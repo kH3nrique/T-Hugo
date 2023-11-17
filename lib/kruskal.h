@@ -16,7 +16,7 @@ void heapSort(int arr[], int n) {
     }
 }
 
-int kruskal(int **mat, int v, int a) {
+void kruskal(int **mat, int v, int a) {
     int pesos[a], pred[a];
     bool visitado[v];
 
@@ -31,8 +31,15 @@ int kruskal(int **mat, int v, int a) {
     }
     
     heapSort(pesos, a);
+    int spm[a];//armazena a posição em que 
+    for (int i = 0; i < a; i++){
+        for (int j = 0; j < a; j++){
+            if (mat[i][j] == pesos[i]){
+                
+            }
+        }
+    }
     
-   
 }
 
 void startKruskal(const char* filePath){
