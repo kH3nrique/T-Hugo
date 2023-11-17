@@ -4,10 +4,10 @@
 #include "instancias.h"
 
 // Função para implementar o algoritmo de Prim
-void prim(int mat[V][V], int vertices) {
-    int custos[V]; 
-    int predecessores[V];
-    bool visitado[V];
+void prim(int** mat, int vertices) { //** pois o numero de linhas e colunas nao e conhecido ainda
+    int custos[vertices]; 
+    int predecessores[vertices];
+    bool visitado[vertices];
 
     // Inicialização
     for (int i = 0; i < vertices; ++i) {
@@ -23,7 +23,7 @@ void prim(int mat[V][V], int vertices) {
         int u = -1;
         for (int i = 0; i < vertices; ++i) {
             if (!visitado[i] && (u == -1 || custos[i] < custos[u])) {
-                u = i; // u passa a ser o menor
+                u = i; // menor custo ( como começa em infinito)
             }
         }
 
@@ -51,7 +51,6 @@ void prim(int mat[V][V], int vertices) {
     for (int i = 1; i < vertices; ++i) {
         printf("  %d - %d \t %d\n", predecessores[i]+1, i+1, custos[i]);
     }
-
 }
 
 void executarAlgoritmoPrim(const char* filePath) {
@@ -67,11 +66,16 @@ void executarAlgoritmoPrim(const char* filePath) {
 
     fscanf(arquivo, "%d %d", &vertices, &arestas);
 
-    int matriz_adjacencia[V][V];
+    // Aloca dinamicamente a matriz baseado nos vertices lidos
+    int** matriz_adjacencia = (int**)malloc(vertices * sizeof(int*)); //sera usada para armazenar ponteiros
+
+    for (int i = 0; i < vertices; ++i) { //armazena vertices inteiros em cada linha
+        matriz_adjacencia[i] = (int*)malloc(vertices * sizeof(int)); //conforme vai tendo linhas, vai alocando memoria
+    }
 
     // Inicializa a matriz com INF
-    for (int i = 0; i < V; ++i) {
-        for (int j = 0; j < V; ++j) {
+    for (int i = 0; i < vertices; ++i) {
+        for (int j = 0; j < vertices; ++j) {
             matriz_adjacencia[i][j] = INF;
         }
     }
@@ -86,6 +90,12 @@ void executarAlgoritmoPrim(const char* filePath) {
     fclose(arquivo);
 
     prim(matriz_adjacencia, vertices);
+
+    // Libera a memória alocada dinamicamente
+    for (int i = 0; i < vertices; ++i) {
+        free(matriz_adjacencia[i]);
+    }
+    free(matriz_adjacencia);
 }
 
 #endif
