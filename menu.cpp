@@ -1,4 +1,4 @@
-#include "Prim.h"
+#include ".\lib\Prim.h"
 
 using namespace std;
 
