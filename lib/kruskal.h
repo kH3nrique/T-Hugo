@@ -3,13 +3,34 @@
 
 #include "instancias.h"
 
-int kruskal(int **mat, int v) {
-    int custos[v], pred[v];
+void heapSort(int arr[], int n) {
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    for (int i = n - 1; i >= 0; i--) {
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        heapify(arr, i, 0);
+    }
+}
+
+int kruskal(int **mat, int v, int a) {
+    int pesos[a], pred[a];
     bool visitado[v];
 
-    while (){
-        /* code */
+    int low = 999;
+    for (int i = 0; i < v; i++){
+        for (int j = 0; j < v; j++){
+            if (mat[i][j] <= low){
+                pesos[i] = mat[i][j];
+                low = mat[i][j];
+            }
+        }
     }
+    
+    heapSort(pesos, a);
     
    
 }
@@ -48,7 +69,7 @@ void startKruskal(const char* filePath){
     }
 
     fclose(file);
-    kruskal(mat, v);
+    kruskal(mat, v, a);
 
     // Libera a memória alocada dinamicamente
     for (int i = 0; i < v; ++i) {
