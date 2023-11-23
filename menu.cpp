@@ -26,6 +26,8 @@ int main() {
                 break;
             case 2:
                 //Algoritimo de Kruskal
+                kruskal acess;
+                acess.startKruskal("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
                 break;
             case 3:
                 system("cls");
