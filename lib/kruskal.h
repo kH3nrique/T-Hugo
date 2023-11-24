@@ -18,30 +18,7 @@ public:
         }
     }
 
-    void sideKruskal(int **mat, int v, int a) {
-        int pesos[a], pred[a];
-        bool visitado[v];
-
-        int low = 999;
-        for (int i = 0; i < v; i++){
-            for (int j = 0; j < v; j++){
-                if (mat[i][j] <= low){
-                    pesos[i] = mat[i][j];
-                    low = mat[i][j];
-                }
-            }
-        }
-        
-        heapSort(pesos, a);
-        int spm[a];//armazena a posição em que 
-        for (int i = 0; i < a; i++){
-            for (int j = 0; j < a; j++){
-                if (mat[i][j] == pesos[i]){
-                    
-                }
-            }
-        }
-        
+    void mainKruskal(const char* filepath, int **mat, int order[]){
     }
 
     void startKruskal(const char* filePath){
@@ -71,14 +48,21 @@ public:
         }
 
         //preenche a matriz
+        int order[11]; //responsavel por armazenar os valores para a ordenação
         for (int i = 0; i < a; ++i) {
             int u, w, peso;
             fscanf(file, "%d %d %d", &u, &w, &peso);
-            mat[u-1][w-1] = mat[w-1][u-1] = peso; // supondo que os vértices são numerados a partir de 1
+            mat[u-1][w-1] = mat[w-1][u-1] = peso;
+            order[i] = mat[u-1][w-1];
         }
 
         fclose(file);
-        sideKruskal(mat, v, a);
+        heapSort(order, a);
+        for (int i = 0; i < a; i++){
+            cout << "Pos: "<< order[i] <<endl;
+        }
+        system("pause");
+        
 
         // Libera a memória alocada dinamicamente
         // for (int i = 0; i < v; ++i) {
