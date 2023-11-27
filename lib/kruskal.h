@@ -19,6 +19,26 @@ public:
     }
 
     void mainKruskal(const char* filepath, int **mat, int order[]){
+        FILE *file = fopen(filepath, "r");
+        int v, a;
+        fscanf(file, "%d %d", &v, &a);
+        
+        for (int i = 0; i < a; ++i) {
+            int u, w, peso;
+            fscanf(file, "%d %d %d", &u, &w, &peso);
+            mat[u-1][w-1] = mat[w-1][u-1] = peso;
+        }
+
+        int takeid;
+
+        for (int i = 0; i < v; ++i) {
+            for (int j = 0; j < v; ++j) {
+                if (order[i] == mat[i][j]){
+                }
+            }
+        }
+        
+        fclose(file);
     }
 
     void startKruskal(const char* filePath){

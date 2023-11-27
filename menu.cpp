@@ -1,6 +1,6 @@
+#include <iostream>
 #include ".\lib\Prim.h"
-#include ".\lib\kruskal.h"
-#include ".\lib\generica.h"
+#include ".\lib\Generica.h"
 
 using namespace std;
 
@@ -22,24 +22,27 @@ int main() {
         // Executar a opção escolhida
         switch (choice) {
             case 1:
-                //Algoritimo Generico
+                system("cls");
+
+                executarAlgoritmo();
+
+                getchar(); getchar();
+                system("cls");
                 break;
             case 2:
-                //Algoritimo de Kruskal
-                kruskal acess;
-                acess.startKruskal("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
+                //Algoritimo e Kruskal
                 break;
             case 3:
                 system("cls");
 
-                executarAlgoritmoPrim("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
+                executarAlgoritmoPrim("C:\\Users\\gabri\\OneDrive\\Documentos\\Quarto periodo\\Trabalho Hugo\\graph.txt");
 
-                getchar();
-                getchar();
+                getchar(); getchar();
                 system("cls");
                 break;
             case 0:
-                cout << "Saindo do programa. Ate mais!" << endl;
+                system("cls");
+                cout << "Saindo do programa!" << endl;
                 break;
             default:
                 cout << "Opcao invalida. Tente novamente." << endl;

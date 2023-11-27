@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Prim.h"
-#include "Generico.h"
+#include ".\lib\Prim.h"
+#include ".\lib\Generica.h"
 
 using namespace std;
 
