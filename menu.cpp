@@ -1,8 +1,7 @@
 #include <iostream>
 #include ".\lib\Prim.h"
 #include ".\lib\Generica.h"
-
-using namespace std;
+#include ".\lib\kruskal.h"
 
 int main() {
     int choice;
@@ -30,7 +29,9 @@ int main() {
                 system("cls");
                 break;
             case 2:
-                //Algoritimo e Kruskal
+                system("cls");
+                Kruskal acess;
+                acess.startKruskal("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
                 break;
             case 3:
                 system("cls");

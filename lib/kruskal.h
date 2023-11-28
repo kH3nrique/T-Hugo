@@ -2,44 +2,38 @@
 #define KRUSKAL_H
 
 #include "instancias.h"
-class kruskal{
+class Kruskal {
 public:
-    //algoritmo de ordenação
-    void heapSort(int arr[], int n) {
-        for (int i = n / 2 - 1; i >= 0; i--)
-            heapify(arr, n, i);
-
-        for (int i = n - 1; i >= 0; i--) {
-            int temp = arr[0];
-            arr[0] = arr[i];
-            arr[i] = temp;
-
-            heapify(arr, i, 0);
-        }
-    }
-
-    void mainKruskal(const char* filepath, int **mat, int order[]){
-        FILE *file = fopen(filepath, "r");
-        int v, a;
-        fscanf(file, "%d %d", &v, &a);
+    // void mainKruskal(int a, int **mat, int order[], int u[], int w[]){
+    //     int id[a];
+    //     for (int i = 0; i < a; i++){
+    //         id[i] = 0;
+    //     }
         
-        for (int i = 0; i < a; ++i) {
-            int u, w, peso;
-            fscanf(file, "%d %d %d", &u, &w, &peso);
-            mat[u-1][w-1] = mat[w-1][u-1] = peso;
-        }
-
-        int takeid;
-
-        for (int i = 0; i < v; ++i) {
-            for (int j = 0; j < v; ++j) {
-                if (order[i] == mat[i][j]){
-                }
-            }
-        }
+    //     for (int i = 0; i < a; i++) {
+    //         for (int j = 0; j < a; j++) {
+    //             if (order[i] == mat[u[i]][w[j]]){
+    //                 id[i] = i;
+    //                 cout << "Here" <<endl;
+    //             }
+    //         }
+    //     }
         
-        fclose(file);
-    }
+    //     for (int i = 0; i < a; i++){
+    //         cout << id[i] <<endl;
+    //         // cout << "Here\n";
+    //         // int tmp;
+    //         // tmp = u[id[i]];
+    //         // u[id[i]] = u[i];
+    //         // u[i] = tmp;
+    //         // // swap;(u[id[i]], u[i]);
+
+    //         // tmp = w[id[i]];
+    //         // w[id[i]] = w[i];
+    //         // w[i] = tmp;
+    //         // swap(w[id[i]], w[i]);
+    //     }
+    // }
 
     void startKruskal(const char* filePath){
         FILE *file;
@@ -48,7 +42,7 @@ public:
         file = fopen(filePath, "r");
 
         if (file == NULL) {
-            printf("Erro ao abrir o arquivo.\n");
+            cout << "Erro ao abrir o arquivo.\n";
             exit(1);
         }
 
@@ -68,21 +62,30 @@ public:
         }
 
         //preenche a matriz
-        int order[11]; //responsavel por armazenar os valores para a ordenação
+        int u[a], w[a];
+        int order[a]; //responsavel por armazenar os valores para a ordenação
         for (int i = 0; i < a; ++i) {
-            int u, w, peso;
-            fscanf(file, "%d %d %d", &u, &w, &peso);
-            mat[u-1][w-1] = mat[w-1][u-1] = peso;
-            order[i] = mat[u-1][w-1];
+            int peso;
+            fscanf(file, "%d %d %d", &u[i], &w[i], &peso);
+            mat[u[i]-1][w[i]-1] = mat[u[i]-1][w[i]-1] = peso;
+            order[i] = mat[u[i]-1][w[i]-1];
         }
 
         fclose(file);
-        heapSort(order, a);
-        for (int i = 0; i < a; i++){
-            cout << "Pos: "<< order[i] <<endl;
-        }
-        system("pause");
         
+        sort(order, order+a);
+        
+        // mainKruskal(a, mat, order, u, w);
+        // for (int i = 0; i < a; i++){
+        //     cout << "Pos: "<< order[i] <<endl;
+        // }
+
+        cout <<"\n  Aresta\tPeso" <<endl;
+        for (int i = 0; i < a; ++i) {
+            cout << u[i] << " - " << w[i] << "\t" << order[i] <<endl;
+        }
+        
+        system("pause");
 
         // Libera a memória alocada dinamicamente
         // for (int i = 0; i < v; ++i) {
