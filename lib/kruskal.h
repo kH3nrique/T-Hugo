@@ -4,36 +4,33 @@
 #include "instancias.h"
 class Kruskal {
 public:
-    // void mainKruskal(int a, int **mat, int order[], int u[], int w[]){
-    //     int id[a];
-    //     for (int i = 0; i < a; i++){
-    //         id[i] = 0;
-    //     }
-        
-    //     for (int i = 0; i < a; i++) {
-    //         for (int j = 0; j < a; j++) {
-    //             if (order[i] == mat[u[i]][w[j]]){
-    //                 id[i] = i;
-    //                 cout << "Here" <<endl;
-    //             }
-    //         }
-    //     }
-        
-    //     for (int i = 0; i < a; i++){
-    //         cout << id[i] <<endl;
-    //         // cout << "Here\n";
-    //         // int tmp;
-    //         // tmp = u[id[i]];
-    //         // u[id[i]] = u[i];
-    //         // u[i] = tmp;
-    //         // // swap;(u[id[i]], u[i]);
+    void mainKruskal(int a, int v, int **mat, int order[], int u[], int w[]){
+        int id[a];
 
-    //         // tmp = w[id[i]];
-    //         // w[id[i]] = w[i];
-    //         // w[i] = tmp;
-    //         // swap(w[id[i]], w[i]);
-    //     }
-    // }
+        for (int x = 0; x < a; x++){
+            for (int i = 0; i < v; i++) {
+                for (int j = 0; j < v; j++) {
+                    if (order[x] == mat[i][j]){
+                        id[i] = i;
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < a; i++){
+            cout << id[i] <<endl;
+            // int tmp;
+            // tmp = u[id[i]];
+            // u[id[i]] = u[i];
+            // u[i] = tmp;
+            swap(u[id[i]], u[i]);
+
+            // tmp = w[id[i]];
+            // w[id[i]] = w[i];
+            // w[i] = tmp;
+            swap(w[id[i]], w[i]);
+        }
+    }
 
     void startKruskal(const char* filePath){
         FILE *file;
@@ -75,7 +72,7 @@ public:
         
         sort(order, order+a);
         
-        // mainKruskal(a, mat, order, u, w);
+        mainKruskal(a, v, mat, order, u, w);
         // for (int i = 0; i < a; i++){
         //     cout << "Pos: "<< order[i] <<endl;
         // }
