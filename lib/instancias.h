@@ -11,6 +11,7 @@
 #include <climits>
 #include <limits>
 #include <stack>
+#include <string.h> 
 
 using namespace std;
 

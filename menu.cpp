@@ -1,10 +1,10 @@
-#include <iostream>
 #include ".\lib\Prim.h"
 #include ".\lib\Generica.h"
 #include ".\lib\kruskal.h"
 
 int main() {
     int choice;
+    Kruskal acess;
 
     do {
         system("cls");
@@ -16,22 +16,20 @@ int main() {
         cout << "3. Algoritmo de Prim" << endl;
         cout << "0. Sair" << endl;
         cout << "\nEscolha uma opcao: ";
-        cin >> choice;
+            cin >> choice;
 
-        // Executar a opção escolhida
+        // Executa a opção escolhida
         switch (choice) {
             case 1:
                 system("cls");
 
                 executarAlgoritmo();
-
                 getchar(); getchar();
                 system("cls");
                 break;
             case 2:
                 system("cls");
-                Kruskal acess;
-                acess.startKruskal("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
+                acess.mainKruskal();
                 break;
             case 3:
                 system("cls");

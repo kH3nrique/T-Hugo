@@ -2,41 +2,102 @@
 #define KRUSKAL_H
 
 #include "instancias.h"
-class Kruskal {
+class Arestas{
+	int vertice1, vertice2, peso;
 public:
-    void mainKruskal(int a, int v, int **mat, int order[], int u[], int w[]){
-        int id[a];
+	Arestas(int v1, int v2, int peso){
+		vertice1 = v1;
+		vertice2 = v2;
+		this->peso = peso;
+	}
 
-        for (int x = 0; x < a; x++){
-            for (int i = 0; i < v; i++) {
-                for (int j = 0; j < v; j++) {
-                    if (order[x] == mat[i][j]){
-                        id[i] = i;
-                    }
-                }
-            }
-        }
-        
-        for (int i = 0; i < a; i++){
-            cout << id[i] <<endl;
-            // int tmp;
-            // tmp = u[id[i]];
-            // u[id[i]] = u[i];
-            // u[i] = tmp;
-            swap(u[id[i]], u[i]);
+	int obterVertice1(){
+		return vertice1;
+	}
 
-            // tmp = w[id[i]];
-            // w[id[i]] = w[i];
-            // w[i] = tmp;
-            swap(w[id[i]], w[i]);
-        }
-    }
+	int obterVertice2(){
+		return vertice2;
+	}
 
-    void startKruskal(const char* filePath){
+	int obterPeso(){
+		return peso;
+	}
+
+	// sobrescrita do operador "<"
+	bool operator < (const Arestas& Arestas2) const{
+		return (peso < Arestas2.peso);
+	}
+};
+
+class Kruskal{
+public:
+    int V; // número de vértices
+	vector<Arestas> Arestass; // vetor de Arestas
+
+	// função que adiciona uma Arestas
+	void adicionarArestas(int v1, int v2, int peso)
+	{
+		Arestas Arestas(v1, v2, peso);
+		Arestass.push_back(Arestas);
+	}
+
+	// função que busca o subconjunto de um elemento "i"
+	int buscar(int subset[], int i)
+	{
+		if(subset[i] == -1)
+			return i;
+		return buscar(subset, subset[i]);
+	}
+
+	// função para unir dois subconjuntos em um único subconjunto
+	void unir(int subset[], int v1, int v2)
+	{
+		int v1_set = buscar(subset, v1);
+		int v2_set = buscar(subset, v2);
+		subset[v1_set] = v2_set;
+	}
+
+	/// função que roda o algoritmo de Kruskal
+	void kruskal(){
+		vector<Arestas> arvore;
+		int size_arestas = Arestass.size();
+
+		// ordena as arestas pelo menor peso
+		sort(Arestass.begin(), Arestass.end());
+
+		// aloca memória para criar "V" subconjuntos
+		int * subset = new int[V];
+
+		// inicializa todos os subconjuntos como conjuntos de um único elemento
+		memset(subset, -1, sizeof(int) * V);
+
+		for(int i = 0; i < size_arestas; i++){
+			int v1 = buscar(subset, Arestass[i].obterVertice1());
+			int v2 = buscar(subset, Arestass[i].obterVertice2());
+
+			if(v1 != v2)
+			{
+				// se forem diferentes é porque NÃO forma ciclo, insere no vetor
+				arvore.push_back(Arestass[i]);
+				unir(subset, v1, v2); // faz a união
+			}
+		}
+
+		int size_arvore = arvore.size();
+
+		// mostra as arestas selecionadas com seus respectivos pesos
+		for(int i = 0; i < size_arvore; i++){
+			char v1 = 'A' + arvore[i].obterVertice1();
+			char v2 = 'A' + arvore[i].obterVertice2();
+			cout << "(" << v1 << ", " << v2 << ") = " << arvore[i].obterPeso() << endl;
+		}
+	}
+
+    void mainKruskal(){
         FILE *file;
         int v, a;//v-> vertices a-> arestas
 
-        file = fopen(filePath, "r");
+        file = fopen("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt", "r");
 
         if (file == NULL) {
             cout << "Erro ao abrir o arquivo.\n";
@@ -44,52 +105,19 @@ public:
         }
 
         fscanf(file, "%d %d", &v, &a);
-
-        // Aloca dinamicamente a matriz baseado nos vertices lidos
-        int** mat = (int**)malloc(v * sizeof(int*));
-        for (int i = 0; i < v; i++){
-            mat[i] = (int*)malloc(v*sizeof(int));
-        }
+        int u[a], w[a], peso;
+        //g(v); // grafo
         
-        //inicia matriz vazia
-        for (int i = 0; i < v; ++i) {
-            for (int j = 0; j < v; ++j) {
-                mat[i][j] = INF;
-            }
-        }
-
-        //preenche a matriz
-        int u[a], w[a];
-        int order[a]; //responsavel por armazenar os valores para a ordenação
-        for (int i = 0; i < a; ++i) {
-            int peso;
+        // adiciona as arestas
+        for (int i = 0; i < a; i++){
             fscanf(file, "%d %d %d", &u[i], &w[i], &peso);
-            mat[u[i]-1][w[i]-1] = mat[u[i]-1][w[i]-1] = peso;
-            order[i] = mat[u[i]-1][w[i]-1];
-        }
-
-        fclose(file);
-        
-        sort(order, order+a);
-        
-        mainKruskal(a, v, mat, order, u, w);
-        // for (int i = 0; i < a; i++){
-        //     cout << "Pos: "<< order[i] <<endl;
-        // }
-
-        cout <<"\n  Aresta\tPeso" <<endl;
-        for (int i = 0; i < a; ++i) {
-            cout << u[i] << " - " << w[i] << "\t" << order[i] <<endl;
+            adicionarArestas(u[i] - 1, w[i] - 1, peso);
         }
         
+        kruskal(); // roda o algoritmo de Kruskal
         system("pause");
-
-        // Libera a memória alocada dinamicamente
-        // for (int i = 0; i < v; ++i) {
-        //     free(mat[i]);
-        // }
-        // free(mat);
     }
+
 };
 
 #endif
