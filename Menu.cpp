@@ -4,7 +4,6 @@
 
 int main() {
     int choice;
-    Kruskal acess;
 
     do {
         system("cls");
@@ -29,7 +28,7 @@ int main() {
                 break;
             case 2:
                 system("cls");
-                acess.mainKruskal();
+                kruskalMain("C:\\Users\\henri\\CODE\\Faculdade\\Grafos\\T-Hugo\\graph.txt");
                 break;
             case 3:
                 system("cls");
